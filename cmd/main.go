@@ -91,7 +91,11 @@ func getCurrentTag(dir string) (*semvar.SemvarTag, error) {
 		return nil, err
 	}
 
-	return &semvarFromTag, nil
+	if semvarFromTag == nil {
+		return nil, errors.New("tagnew: got nil semvar tag")
+	}
+
+	return semvarFromTag, nil
 }
 
 func isGitDirectory(dirEntires []fs.DirEntry) bool {
